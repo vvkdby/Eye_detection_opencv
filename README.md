@@ -2,7 +2,8 @@
 Face and eye detector using Voila-Jones algorithm
 
 This function takes the following input:
-  -String containing the image name
+  -String containing the image name.
+  
 It spits out the following output: 
   - Center of all eyes detected in the image - in JSON format
   - Visualization (of detected face and detected eyes)
