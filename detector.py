@@ -3,8 +3,9 @@ import cv2
 import simplejson as json
 
 #these are the downloaded classifier files that OpenCV provides us
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
+#OpenCV's cascade classifier class
+face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+eye_detector = cv2.CascadeClassifier('haarcascade_eye.xml')
 
 #input the file name (assumes it is in the same folder)
 filename = raw_input()
@@ -13,7 +14,7 @@ img = cv2.imread(filename)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 #performing face detection
-faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+faces = face_detector.detectMultiScale(gray, 1.3, 5)
 
 for (x,y,w,h) in faces:
     #visualization of the face
@@ -21,7 +22,7 @@ for (x,y,w,h) in faces:
     roi_gray = gray[y:y+h, x:x+w]
     roi_color = img[y:y+h, x:x+w]
     #performing eye detection
-    eyes = eye_cascade.detectMultiScale(roi_gray)
+    eyes = eye_detector.detectMultiScale(roi_gray)
     #printing out values in JSON format
     for i in range(len(eyes)):
         avg_x = (eyes[i][0] + eyes[i][2])/2
